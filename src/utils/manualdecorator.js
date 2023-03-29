@@ -7,8 +7,8 @@
  * @module anchor/utils
  */
 
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
+import { ObservableMixin } from 'ckeditor5/src/utils';
+import { mix } from 'ckeditor5/src/utils';
 
 /**
  * Helper class that stores manual decorators with observable {@link module:anchor/utils~ManualDecorator#value}

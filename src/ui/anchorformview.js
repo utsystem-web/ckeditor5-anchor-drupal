@@ -7,25 +7,25 @@
  * @module anchor/ui/anchorformview
  */
 
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
+import { View } from 'ckeditor5/src/ui';
+import { ViewCollection } from 'ckeditor5/src/ui';
 
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import SwitchButtonView from '@ckeditor/ckeditor5-ui/src/button/switchbuttonview';
+import { ButtonView } from 'ckeditor5/src/ui';
+import { SwitchButtonView } from 'ckeditor5/src/ui';
 
-import LabeledFieldView from '@ckeditor/ckeditor5-ui/src/labeledfield/labeledfieldview';
-import { createLabeledInputText } from '@ckeditor/ckeditor5-ui/src/labeledfield/utils';
-import injectCssTransitionDisabler from '@ckeditor/ckeditor5-ui/src/bindings/injectcsstransitiondisabler';
+import { LabeledFieldView } from 'ckeditor5/src/ui';
+import { createLabeledInputText } from 'ckeditor5/src/ui';
+import { injectCssTransitionDisabler } from 'ckeditor5/src/ui';
 
-import submitHandler from '@ckeditor/ckeditor5-ui/src/bindings/submithandler';
-import FocusTracker from '@ckeditor/ckeditor5-utils/src/focustracker';
-import FocusCycler from '@ckeditor/ckeditor5-ui/src/focuscycler';
-import KeystrokeHandler from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
+import { submitHandler } from 'ckeditor5/src/ui';
+import { FocusTracker } from 'ckeditor5/src/utils';
+import { FocusCycler } from 'ckeditor5/src/ui';
+import { KeystrokeHandler } from 'ckeditor5/src/utils';
 
 import checkIcon from '@ckeditor/ckeditor5-core/theme/icons/check.svg';
 import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
-import '../../theme/anchorform.css';
-import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
+// import '../../theme/anchorform.css';
+// import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
 
 /**
  * The anchor form view controller class.

@@ -7,12 +7,12 @@
  * @module anchor/anchorimageui
  */
 
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import Image from '@ckeditor/ckeditor5-image/src/image';
-import AnchorUI from './anchorui';
-import AnchorEditing from './anchorediting';
-import { isImageWidget } from '@ckeditor/ckeditor5-image/src/image/utils';
+import { ButtonView } from 'ckeditor5/src/button';
+import { Plugin } from 'ckeditor5/src/core';
+import { Image } from 'ckeditor5/src/image';
+import { AnchorUI } from './anchorui';
+import { AnchorEditing } from './anchorediting';
+import { isImageWidget } from 'ckeditor5/src/image';
 import { LINK_KEYSTROKE } from './utils';
 
 import anchorIcon from '../theme/icons/anchor.svg';

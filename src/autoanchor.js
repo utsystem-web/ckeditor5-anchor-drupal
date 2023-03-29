@@ -7,9 +7,9 @@
  * @module anchor/autoanchor
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import TextWatcher from '@ckeditor/ckeditor5-typing/src/textwatcher';
-import getLastTextLine from '@ckeditor/ckeditor5-typing/src/utils/getlasttextline';
+import { Plugin } from 'ckeditor5/src/core';
+import { TextWatcher } from 'ckeditor5/src/typing';
+import { getLastTextLine } from 'ckeditor5/src/typing';
 import { addAnchorProtocolIfApplicable } from './utils';
 
 const MIN_LINK_LENGTH_WITH_SPACE_AT_END = 4; // Ie: "t.co " (length 5).

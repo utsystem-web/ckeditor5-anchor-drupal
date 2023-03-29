@@ -7,19 +7,19 @@
  * @module anchor/ui/anchoractionsview
  */
 
-import View from '@ckeditor/ckeditor5-ui/src/view';
-import ViewCollection from '@ckeditor/ckeditor5-ui/src/viewcollection';
+import { View } from 'ckeditor5/src/ui';
+import { ViewCollection } from 'ckeditor5/src/ui';
 
-import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
+import { ButtonView } from 'ckeditor5/src/ui';
 
-import FocusTracker from '@ckeditor/ckeditor5-utils/src/focustracker';
-import FocusCycler from '@ckeditor/ckeditor5-ui/src/focuscycler';
-import KeystrokeHandler from '@ckeditor/ckeditor5-utils/src/keystrokehandler';
+import { FocusTracker } from 'ckeditor5/src/utils';
+import { FocusCycler } from 'ckeditor5/src/ui';
+import { KeystrokeHandler } from 'ckeditor5/src/utils';
 
 import unanchorIcon from '../../theme/icons/unanchor.svg';
-import pencilIcon from '@ckeditor/ckeditor5-core/theme/icons/pencil.svg';
-import '../../theme/anchoractions.css';
-import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
+import { icons } from 'ckeditor5/src/core';
+// import '../../theme/anchoractions.css';
+// import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
 
 /**
  * The anchor actions view class. This view displays the anchor preview, allows
@@ -64,7 +64,7 @@ export default class AnchorActionsView extends View {
 		 *
 		 * @member {module:ui/button/buttonview~ButtonView}
 		 */
-		this.editButtonView = this._createButton( t( 'Edit anchor' ), pencilIcon, 'edit' );
+		this.editButtonView = this._createButton( t( 'Edit anchor' ), icons.pencil, 'edit' );
 
 		/**
 		 * A collection of views that can be focused in the view.

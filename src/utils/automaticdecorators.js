@@ -7,7 +7,7 @@
  * @module anchor/utils
  */
 
-import toMap from '@ckeditor/ckeditor5-utils/src/tomap';
+import { toMap } from 'ckeditor5/src/utils';
 
 /**
  * Helper class that ties together all {@link module:anchor/anchor~AnchorDecoratorAutomaticDefinition} and provides

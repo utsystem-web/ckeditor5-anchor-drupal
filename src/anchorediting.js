@@ -7,12 +7,12 @@
  * @module anchor/anchorediting
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import MouseObserver from '@ckeditor/ckeditor5-engine/src/view/observer/mouseobserver';
-import TwoStepCaretMovement from '@ckeditor/ckeditor5-typing/src/twostepcaretmovement';
-import inlineHighlight from '@ckeditor/ckeditor5-typing/src/utils/inlinehighlight';
-import Input from '@ckeditor/ckeditor5-typing/src/input';
-import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
+import { Plugin } from 'ckeditor5/src/core';
+import { MouseObserver } from 'ckeditor5/src/engine';
+import { TwoStepCaretMovement } from 'ckeditor5/src/typing';
+import { inlineHighlight } from 'ckeditor5/src/typing';
+import { Input } from 'ckeditor5/src/typing';
+import { Clipboard } from 'ckeditor5/src/clipboard';
 import AnchorCommand from './anchorcommand';
 import UnanchorCommand from './unanchorcommand';
 import ManualDecorator from './utils/manualdecorator';
@@ -20,7 +20,7 @@ import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattribu
 import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
 import { createAnchorElement, ensureSafeUrl, getLocalizedDecorators, normalizeDecorators } from './utils';
 
-import '../theme/anchor.css';
+// import '../theme/anchor.css';
 
 const HIGHLIGHT_CLASS = 'ck-anchor_selected';
 const DECORATOR_AUTOMATIC = 'automatic';

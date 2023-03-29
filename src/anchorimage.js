@@ -7,11 +7,11 @@
  * @module anchor/anchorimage
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import AnchorImageEditing from './anchorimageediting';
-import AnchorImageUI from './anchorimageui';
+import { Plugin } from 'ckeditor5/src/core';
+import { AnchorImageEditing } from './anchorimageediting';
+import { AnchorImageUI } from './anchorimageui';
 
-import '../theme/anchorimage.css';
+// import '../theme/anchorimage.css';
 
 /**
  * The `AnchorImage` plugin.

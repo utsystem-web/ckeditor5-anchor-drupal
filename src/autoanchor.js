@@ -108,12 +108,10 @@ export default class AutoAnchor extends Plugin {
 			}
 		} );
 
-		const input = editor.plugins.get( 'Input' );
-
 		watcher.on( 'matched:data', ( evt, data ) => {
 			const { batch, range, url } = data;
 
-			if ( !input.isInput( batch ) ) {
+			if ( !batch.isTyping ) {
 				return;
 			}
 

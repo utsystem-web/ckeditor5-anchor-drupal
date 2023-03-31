@@ -1,5 +1,5 @@
 {
-  "name": "ckeditor5-anchor-drupal",
+  "name": "@northernco/ckeditor5-anchor-drupal",
   "version": "1.0.0",
   "description": "Drupal CKEditor 5 integration",
   "author": "",

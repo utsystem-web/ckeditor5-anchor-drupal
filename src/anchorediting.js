@@ -20,7 +20,7 @@ import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattribu
 import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
 import { createAnchorElement, ensureSafeUrl, getLocalizedDecorators, normalizeDecorators } from './utils';
 
-// import '../theme/anchor.css';
+import '../theme/anchor.css';
 
 const HIGHLIGHT_CLASS = 'ck-anchor_selected';
 const DECORATOR_AUTOMATIC = 'automatic';

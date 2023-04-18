@@ -24,8 +24,8 @@ import { KeystrokeHandler } from 'ckeditor5/src/utils';
 
 import checkIcon from '@ckeditor/ckeditor5-core/theme/icons/check.svg';
 import cancelIcon from '@ckeditor/ckeditor5-core/theme/icons/cancel.svg';
-// import '../../theme/anchorform.css';
-// import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
+import '../../theme/anchorform.css';
+import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
 
 /**
  * The anchor form view controller class.

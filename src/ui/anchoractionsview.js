@@ -18,8 +18,8 @@ import { KeystrokeHandler } from 'ckeditor5/src/utils';
 
 import unanchorIcon from '../../theme/icons/unanchor.svg';
 import { icons } from 'ckeditor5/src/core';
-// import '../../theme/anchoractions.css';
-// import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
+import '../../theme/anchoractions.css';
+import '@ckeditor/ckeditor5-ui/theme/components/responsive-form/responsiveform.css';
 
 /**
  * The anchor actions view class. This view displays the anchor preview, allows

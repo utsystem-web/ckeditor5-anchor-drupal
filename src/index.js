@@ -7,8 +7,4 @@
  */
 // cSpell:ignore simplebox
 
-import Anchor from './anchor';
-
-export default {
-  Anchor,
-};
+export { default as Anchor } from './anchor';

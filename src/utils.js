@@ -8,6 +8,7 @@
  */
 
 import { upperFirst } from 'lodash-es';
+import anchorIcon from '../theme/icons/smallanchor.svg';
 
 const ATTRIBUTE_WHITESPACES = /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205f\u3000]/g; // eslint-disable-line no-control-regex
 const SAFE_URL = /^(?:(?:https?|ftps?|mailto):|[^a-z]|[a-z+.-]+(?:[^a-z+.:-]|$))/i;
@@ -31,7 +32,9 @@ export const LINK_KEYSTROKE = 'Ctrl+M';
  * @returns {Boolean}
  */
 export function isAnchorElement( node ) {
-	return node.is( 'attributeElement' ) && !!node.getCustomProperty( 'anchor' );
+	return (
+        node.is('attributeElement') && !!node.getCustomProperty( 'anchor' )
+    );
 }
 
 /**
@@ -45,6 +48,40 @@ export function createAnchorElement( id, { writer } ) {
 	// Priority 5 - https://github.com/ckeditor/ckeditor5-anchor/issues/121.
 	const anchorElement = writer.createAttributeElement( 'a', { id, name: id }, { priority: 5 } );
 	writer.addClass("ck-anchor", anchorElement);
+	writer.setCustomProperty( 'anchor', true, anchorElement );
+
+	return anchorElement;
+}
+
+/**
+ * Creates an empty anchor {@link module:engine/view/emptyelement~EmptyElement} with the provided `id` attribute.
+ *
+ * @param {String} id
+ * @param {module:engine/conversion/downcastdispatcher~DowncastConversionApi} conversionApi
+ * @returns {module:engine/view/emptyelement~EmptyElement}
+ */
+export function createEmptyAnchorElement( id, { writer } ) {
+	let anchorElement = null;
+	anchorElement = writer.createEmptyElement( 'a', { id, name: id });
+
+	writer.addClass("ck-anchor", anchorElement);
+	writer.setCustomProperty( 'anchor', true, anchorElement );
+
+	return anchorElement;
+}
+
+/**
+ * Creates an SVG placeholder {@link module:engine/view/emptyelement~EmptyElement} with the provided `id` attribute.
+ *
+ * @param {String} id
+ * @param {module:engine/conversion/downcastdispatcher~DowncastConversionApi} conversionApi
+ * @returns {module:engine/view/emptyelement~EmptyElement}
+ */
+export function createEmptyPlaceholderAnchorElement( id, { writer } ) {
+	const anchorElement = writer.createRawElement('span', { id, name: id }, function (domDocument) {
+       domDocument.innerHTML = `[INVISIBLE ANCHOR: ${id}]`;
+    });
+    writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
 	return anchorElement;

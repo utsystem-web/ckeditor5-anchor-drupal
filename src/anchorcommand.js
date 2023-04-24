@@ -189,14 +189,14 @@ export default class AnchorCommand extends Command {
 				// So, if `id` is empty, do not create text node.
 				else if ( id !== '' ) {
 					const attributes = toMap( selection.getAttributes() );
-
-					attributes.set( 'anchorId', id );
+					attributes.set('id', id);
+					attributes.set('name', id);
 
 					truthyManualDecorators.forEach( item => {
 						attributes.set( item, true );
 					} );
 
-					const { end: positionAfter } = model.insertContent( writer.createText( id, attributes ), position );
+					const { end: positionAfter } = model.insertContent( writer.createElement( 'anchor', attributes ), position );
 
 					// Put the selection at the end of the inserted anchor.
 					// Using end of range returned from insertContent in case nodes with the same attributes got merged.

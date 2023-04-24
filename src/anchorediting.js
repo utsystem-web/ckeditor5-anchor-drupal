@@ -18,7 +18,13 @@ import UnanchorCommand from './unanchorcommand';
 import ManualDecorator from './utils/manualdecorator';
 import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattributerange';
 import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
-import { createAnchorElement, ensureSafeUrl, getLocalizedDecorators, normalizeDecorators } from './utils';
+import {
+	createAnchorElement,
+	createEmptyAnchorElement, createEmptyPlaceholderAnchorElement,
+	ensureSafeUrl,
+	getLocalizedDecorators,
+	normalizeDecorators
+} from './utils';
 
 import '../theme/anchor.css';
 
@@ -70,28 +76,58 @@ export default class AnchorEditing extends Plugin {
 
 		// Allow anchor attribute on all inline nodes.
 		editor.model.schema.extend( '$text', { allowAttributes: 'anchorId' } );
+		editor.model.schema.register('anchor', {
+			inheritAllFrom: '$inlineObject',
+			allowAttributes: [ 'id', 'name' ]
+		});
 
 		editor.conversion.for( 'dataDowncast' )
 			.attributeToElement( { model: 'anchorId', view: createAnchorElement } );
+		editor.conversion.for('dataDowncast').elementToElement({
+			model: 'anchor',
+			view: (modelItem, viewWriter) => {
+				return createEmptyAnchorElement( modelItem.getAttribute('id'), viewWriter);
+			}
+		});
 
 		editor.conversion.for( 'editingDowncast' )
 			.attributeToElement( { model: 'anchorId', view: ( id, conversionApi ) => {
-				return createAnchorElement( ensureSafeUrl( id ), conversionApi );
+				if (id) {
+					return createAnchorElement( ensureSafeUrl( id ), conversionApi );
+				}
+				else {
+					return null;
+				}
 			} } );
+		editor.conversion.for('editingDowncast').elementToElement({
+			model: 'anchor',
+			view: (modelItem, viewWriter) => {
+				return createEmptyPlaceholderAnchorElement( modelItem.getAttribute('id'), viewWriter, true);
+			}
+		});
 
-		editor.conversion.for( 'upcast' )
-			.elementToAttribute( {
-				view: {
-					name: 'a',
-					attributes: {
-						id: true
+		editor.conversion.for( 'upcast' ).add( dispatcher => {
+			dispatcher.on( 'element:a', ( evt, data, conversionApi ) => {
+				if (conversionApi.consumable.consume(data.viewItem, {name: true, attributes: ['id']})) {
+					// The <a> element is inline and is represented by an attribute in the model.
+					// This is why you need to convert only children.
+					const {modelRange} = conversionApi.convertChildren(data.viewItem, data.modelCursor);
+
+					// Handle blank anchor tags.
+					if (!Array.from(modelRange.getItems()).length) {
+						conversionApi.writer.insertElement('anchor', {id: data.viewItem.getAttribute('id')}, data.modelCursor);
 					}
-				},
-				model: {
-					key: 'anchorId',
-					value: viewElement => viewElement.getAttribute( 'id' )
+					// Handle anchor tags that wrap content.
+					else {
+						for (let item of modelRange.getItems()) {
+							if (conversionApi.schema.checkAttribute(item, 'anchorId')) {
+								conversionApi.writer.setAttribute('anchorId', data.viewItem.getAttribute('id'), item);
+							}
+						}
+					}
 				}
 			} );
+		} );
 
 		// Create anchoring commands.
 		editor.commands.add( 'anchor', new AnchorCommand( editor ) );

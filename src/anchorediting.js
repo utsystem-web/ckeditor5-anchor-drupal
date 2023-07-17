@@ -109,16 +109,26 @@ export default class AnchorEditing extends Plugin {
 		editor.conversion.for( 'upcast' ).add( dispatcher => {
 			dispatcher.on( 'element:a', ( evt, data, conversionApi ) => {
 				if (conversionApi.consumable.consume(data.viewItem, {name: true, attributes: ['id']})) {
-					// The <a> element is inline and is represented by an attribute in the model.
-					// This is why you need to convert only children.
-					const {modelRange} = conversionApi.convertChildren(data.viewItem, data.modelCursor);
-
 					// Handle blank anchor tags.
-					if (!Array.from(modelRange.getItems()).length) {
-						conversionApi.writer.insertElement('anchor', {id: data.viewItem.getAttribute('id')}, data.modelCursor);
+					if (!data.viewItem.childCount) {
+						const modelElement = conversionApi.writer.createElement('anchor', {id: data.viewItem.getAttribute('id')});
+
+						if (!conversionApi.safeInsert(modelElement, data.modelCursor)) {
+							return;
+						}
+
+						conversionApi.updateConversionResult(modelElement, data);
 					}
 					// Handle anchor tags that wrap content.
 					else {
+						// The <a> element is inline and is represented by an attribute in the model.
+						// This is why you need to convert only children.
+						if (!data.modelRange) {
+							Object.assign(data, conversionApi.convertChildren(data.viewItem, data.modelCursor));
+						}
+
+						const { modelRange } = data;
+
 						for (let item of modelRange.getItems()) {
 							if (conversionApi.schema.checkAttribute(item, 'anchorId')) {
 								conversionApi.writer.setAttribute('anchorId', data.viewItem.getAttribute('id'), item);

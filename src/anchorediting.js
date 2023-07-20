@@ -77,8 +77,10 @@ export default class AnchorEditing extends Plugin {
 		// Allow anchor attribute on all inline nodes.
 		editor.model.schema.extend( '$text', { allowAttributes: 'anchorId' } );
 		editor.model.schema.register('anchor', {
-			inheritAllFrom: '$inlineObject',
-			allowAttributes: [ 'id', 'name' ]
+			allowContentOf: '$inlineObject',
+			allowWhere: '$inlineObject',
+			inheritTypesFrom: '$inlineObject',
+			allowAttributes: [ 'class', 'id', 'name' ]
 		});
 
 		editor.conversion.for( 'dataDowncast' )

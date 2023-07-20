@@ -16,6 +16,7 @@ import { MediaEmbed } from '@ckeditor/ckeditor5-media-embed';
 import { Paragraph } from '@ckeditor/ckeditor5-paragraph';
 import { Table, TableToolbar } from '@ckeditor/ckeditor5-table';
 import { Base64UploadAdapter } from '@ckeditor/ckeditor5-upload';
+import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 
 import Anchor from '../src/anchor';
 
@@ -45,7 +46,8 @@ ClassicEditor
 			TableToolbar,
 			CodeBlock,
 			Code,
-			Base64UploadAdapter
+			Base64UploadAdapter,
+			GeneralHtmlSupport
 		],
 		toolbar: [
 			'anchor',
@@ -85,6 +87,23 @@ ClassicEditor
 				'tableColumn',
 				'tableRow',
 				'mergeTableCells'
+			]
+		},
+		htmlSupport: {
+			allow: [
+				{
+						name: /.*/,
+						attributes: true,
+						classes: true,
+						styles: true
+				}
+			],
+			disallow: [
+				{
+						name: 'a',
+						attributes: ['id', 'name'],
+						classes: 'ck-anchor'
+				}
 			]
 		}
 	} )

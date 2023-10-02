@@ -77,8 +77,10 @@ export default class AnchorEditing extends Plugin {
 		// Allow anchor attribute on all inline nodes.
 		editor.model.schema.extend( '$text', { allowAttributes: 'anchorId' } );
 		editor.model.schema.register('anchor', {
-			inheritAllFrom: '$inlineObject',
-			allowAttributes: [ 'id', 'name' ]
+			allowContentOf: '$inlineObject',
+			allowWhere: '$inlineObject',
+			inheritTypesFrom: '$inlineObject',
+			allowAttributes: [ 'class', 'id' ]
 		});
 
 		editor.conversion.for( 'dataDowncast' )
@@ -106,28 +108,42 @@ export default class AnchorEditing extends Plugin {
 			}
 		});
 
-		editor.conversion.for( 'upcast' ).add( dispatcher => {
-			dispatcher.on( 'element:a', ( evt, data, conversionApi ) => {
-				if (conversionApi.consumable.consume(data.viewItem, {name: true, attributes: ['id']})) {
-					// The <a> element is inline and is represented by an attribute in the model.
-					// This is why you need to convert only children.
-					const {modelRange} = conversionApi.convertChildren(data.viewItem, data.modelCursor);
-
-					// Handle blank anchor tags.
-					if (!Array.from(modelRange.getItems()).length) {
-						conversionApi.writer.insertElement('anchor', {id: data.viewItem.getAttribute('id')}, data.modelCursor);
+		editor.conversion.for( 'upcast' )
+			.elementToAttribute( {
+				view: {
+					name: 'a',
+					attributes: {
+						id: true
 					}
-					// Handle anchor tags that wrap content.
-					else {
-						for (let item of modelRange.getItems()) {
-							if (conversionApi.schema.checkAttribute(item, 'anchorId')) {
-								conversionApi.writer.setAttribute('anchorId', data.viewItem.getAttribute('id'), item);
-							}
+				},
+				model: {
+					key: 'anchorId',
+					value: viewElement => {
+						if (viewElement.childCount < 1) {
+							return;
 						}
+
+						return viewElement.getAttribute( 'id' );
 					}
 				}
 			} );
-		} );
+
+		editor.conversion.for( 'upcast' )
+			.elementToElement( {
+				view: {
+					name: 'a',
+					attributes: {
+						id: true
+					}
+				},
+				model: ( viewElement, { writer } ) => {
+					if (viewElement.childCount > 0) {
+						return;
+					}
+
+					return writer.createElement( 'anchor', { id: viewElement.getAttribute('id') } );
+				}
+			} );
 
 		// Create anchoring commands.
 		editor.commands.add( 'anchor', new AnchorCommand( editor ) );

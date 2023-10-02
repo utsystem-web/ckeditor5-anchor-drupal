@@ -8,7 +8,6 @@
  */
 
 import { upperFirst } from 'lodash-es';
-import anchorIcon from '../theme/icons/smallanchor.svg';
 
 const ATTRIBUTE_WHITESPACES = /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205f\u3000]/g; // eslint-disable-line no-control-regex
 const SAFE_URL = /^(?:(?:https?|ftps?|mailto):|[^a-z]|[a-z+.-]+(?:[^a-z+.:-]|$))/i;
@@ -46,7 +45,7 @@ export function isAnchorElement( node ) {
  */
 export function createAnchorElement( id, { writer } ) {
 	// Priority 5 - https://github.com/ckeditor/ckeditor5-anchor/issues/121.
-	const anchorElement = writer.createAttributeElement( 'a', { id, name: id }, { priority: 5 } );
+	const anchorElement = writer.createAttributeElement( 'a', { id }, { priority: 5 } );
 	writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
@@ -62,7 +61,7 @@ export function createAnchorElement( id, { writer } ) {
  */
 export function createEmptyAnchorElement( id, { writer } ) {
 	let anchorElement = null;
-	anchorElement = writer.createEmptyElement( 'a', { id, name: id });
+	anchorElement = writer.createEmptyElement( 'a', { id });
 
 	writer.addClass("ck-anchor", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
@@ -78,7 +77,7 @@ export function createEmptyAnchorElement( id, { writer } ) {
  * @returns {module:engine/view/emptyelement~EmptyElement}
  */
 export function createEmptyPlaceholderAnchorElement( id, { writer } ) {
-	const anchorElement = writer.createRawElement('span', { id, name: id }, function (domDocument) {
+	const anchorElement = writer.createRawElement('span', { id }, function (domDocument) {
        domDocument.innerHTML = `[INVISIBLE ANCHOR: ${id}]`;
     });
     writer.addClass("ck-anchor", anchorElement);

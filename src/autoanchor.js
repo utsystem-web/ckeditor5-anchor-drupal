@@ -14,39 +14,13 @@ import { addAnchorProtocolIfApplicable } from './utils';
 
 const MIN_LINK_LENGTH_WITH_SPACE_AT_END = 4; // Ie: "t.co " (length 5).
 
-// This was a tweak from https://gist.github.com/dperini/729294.
 const URL_REG_EXP = new RegExp(
 	// Group 1: Line start or after a space.
 	'(^|\\s)' +
-	// Group 2: Detected URL (or e-mail).
-	'(' +
-		// Protocol identifier or short syntax "//"
-		// a. Full form http://user@foo.bar.baz:8080/foo/bar.html#baz?foo=bar
-		'(' +
-			'(?:(?:(?:https?|ftp):)?\\/\\/)' +
-			// BasicAuth using user:pass (optional)
-			'(?:\\S+(?::\\S*)?@)?' +
-			'(?:' +
-				// Host & domain names.
-				'(?![-_])(?:[-\\w\\u00a1-\\uffff]{0,63}[^-_]\\.)+' +
-				// TLD identifier name.
-				'(?:[a-z\\u00a1-\\uffff]{2,})' +
-			')' +
-			// port number (optional)
-			'(?::\\d{2,5})?' +
-			// resource path (optional)
-			'(?:[/?#]\\S*)?' +
-		')' +
-		'|' +
-		// b. Short form (either www.example.com or example@example.com)
-		'(' +
-			'(www.|(\\S+@))' +
-			// Host & domain names.
-			'((?![-_])(?:[-\\w\\u00a1-\\uffff]{0,63}[^-_]\\.))+' +
-	// TLD identifier name.
-	'(?:[a-z\\u00a1-\\uffff]{2,})' +
-	')' +
-	')$', 'i' );
+	// Group 2: Detected anchor (begin with #, follows HTML5 restrictions on
+  // allowed values).
+	'(#\\S+)'
+);
 
 const URL_GROUP_IN_MATCH = 2;
 

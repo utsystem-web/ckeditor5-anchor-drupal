@@ -194,7 +194,8 @@ export default class AutoAnchor extends Plugin {
 		model.enqueueChange( writer => {
 			const defaultProtocol = this.editor.config.get( 'anchor.defaultProtocol' );
 			const parsedUrl = addAnchorProtocolIfApplicable( anchor, defaultProtocol );
-			writer.setAttribute( 'anchorId', parsedUrl, range );
+      // Create a link to an anchor with the parsed value.
+			writer.setAttribute( 'linkHref', parsedUrl, range );
 		} );
 	}
 }

@@ -80,17 +80,17 @@ export default class AnchorEditing extends Plugin {
 			allowContentOf: '$inlineObject',
 			allowWhere: '$inlineObject',
 			inheritTypesFrom: '$inlineObject',
-			allowAttributes: [ 'class', 'id' ]
+			allowAttributes: [ 'class', 'id', 'anchorId' ]
 		});
 
-		editor.conversion.for( 'dataDowncast' )
-			.attributeToElement( { model: 'anchorId', view: createAnchorElement } );
-		editor.conversion.for('dataDowncast').elementToElement({
-			model: 'anchor',
-			view: (modelItem, viewWriter) => {
-				return createEmptyAnchorElement( modelItem.getAttribute('id'), viewWriter);
-			}
-		});
+		// editor.conversion.for( 'dataDowncast' )
+		// 	.attributeToElement( { model: 'anchorId', view: createAnchorElement } );
+		// editor.conversion.for('dataDowncast').elementToElement({
+		// 	model: 'anchor',
+		// 	view: (modelItem, viewWriter) => {
+		// 		return createEmptyAnchorElement( modelItem.getAttribute('id'), viewWriter);
+		// 	}
+		// });
 
 		editor.conversion.for( 'editingDowncast' )
 			.attributeToElement( { model: 'anchorId', view: ( id, conversionApi ) => {
@@ -104,7 +104,7 @@ export default class AnchorEditing extends Plugin {
 		editor.conversion.for('editingDowncast').elementToElement({
 			model: 'anchor',
 			view: (modelItem, viewWriter) => {
-				return createEmptyPlaceholderAnchorElement( modelItem.getAttribute('id'), viewWriter, true);
+				return createEmptyPlaceholderAnchorElement( modelItem.getAttribute('anchorId'), viewWriter, true);
 			}
 		});
 
@@ -133,7 +133,7 @@ export default class AnchorEditing extends Plugin {
 				view: {
 					name: 'a',
 					attributes: {
-						id: true
+						id: true,
 					}
 				},
 				model: ( viewElement, { writer } ) => {
@@ -141,7 +141,7 @@ export default class AnchorEditing extends Plugin {
 						return;
 					}
 
-					return writer.createElement( 'anchor', { id: viewElement.getAttribute('id') } );
+					return writer.createElement( 'anchor', { anchorId: viewElement.getAttribute('id') } );
 				}
 			} );
 

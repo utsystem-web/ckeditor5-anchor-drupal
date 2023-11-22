@@ -83,14 +83,20 @@ export default class AnchorEditing extends Plugin {
 			allowAttributes: [ 'class', 'id', 'anchorId' ]
 		});
 
-		// editor.conversion.for( 'dataDowncast' )
-		// 	.attributeToElement( { model: 'anchorId', view: createAnchorElement } );
-		// editor.conversion.for('dataDowncast').elementToElement({
-		// 	model: 'anchor',
-		// 	view: (modelItem, viewWriter) => {
-		// 		return createEmptyAnchorElement( modelItem.getAttribute('id'), viewWriter);
-		// 	}
-		// });
+		editor.conversion.for( 'dataDowncast' )
+			.attributeToElement( {
+				model: {
+					name: '$text',
+					key: 'anchorId',
+				},
+				view: createAnchorElement,
+			});
+		editor.conversion.for('dataDowncast').elementToElement({
+			model: 'anchor',
+			view: (modelItem, viewWriter) => {
+				return createEmptyAnchorElement( modelItem.getAttribute('anchorId'), viewWriter);
+			}
+		});
 
 		editor.conversion.for( 'editingDowncast' )
 			.attributeToElement( { model: 'anchorId', view: ( id, conversionApi ) => {

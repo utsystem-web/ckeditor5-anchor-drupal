@@ -189,7 +189,7 @@ export default class AnchorCommand extends Command {
 				// So, if `id` is empty, do not create text node.
 				else if ( id !== '' ) {
 					const attributes = toMap( selection.getAttributes() );
-					attributes.set('id', id);
+					attributes.set('anchorId', id);
 
 					truthyManualDecorators.forEach( item => {
 						attributes.set( item, true );

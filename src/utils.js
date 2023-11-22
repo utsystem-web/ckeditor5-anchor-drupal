@@ -65,7 +65,6 @@ export function createEmptyAnchorElement( id, { writer } ) {
 	anchorElement = writer.createEmptyElement( 'a', { id });
 
 	writer.addClass("ck-anchor", anchorElement);
-	writer.addClass("foo", anchorElement);
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
 	return anchorElement;

@@ -76,6 +76,11 @@ export default class UnanchorCommand extends Command {
 					}
 				}
 			}
+
+			// Remove an invisible anchor.
+			if (selection.getSelectedElement()?.name === 'anchor') {
+				model.deleteContent(selection);
+			}
 		} );
 	}
 }

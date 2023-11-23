@@ -18,6 +18,8 @@ import UnanchorCommand from './unanchorcommand';
 import ManualDecorator from './utils/manualdecorator';
 import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattributerange';
 import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
+import { viewToModelPositionOutsideModelElement } from '@ckeditor/ckeditor5-widget';
+
 import {
 	createAnchorElement,
 	createEmptyAnchorElement, createEmptyPlaceholderAnchorElement,
@@ -178,6 +180,11 @@ export default class AnchorEditing extends Plugin {
 
 		// Handle removing the content after the anchor element.
 		this._handleDeleteContentAfterAnchor();
+
+		editor.editing.mapper.on(
+			'viewToModelPosition',
+			viewToModelPositionOutsideModelElement( editor.model, viewElement => viewElement.hasClass( 'ck-anchor-placeholder' ) )
+		);
 	}
 
 	/**

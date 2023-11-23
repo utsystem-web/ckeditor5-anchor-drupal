@@ -78,7 +78,9 @@ export function createEmptyAnchorElement( id, { writer } ) {
  * @returns {module:engine/view/emptyelement~EmptyElement}
  */
 export function createEmptyPlaceholderAnchorElement( anchorId, { writer } ) {
-	const anchorElement = writer.createContainerElement('span', {}, [writer.createText(`[INVISIBLE ANCHOR: ${anchorId}]`)]);
+	const anchorElement = writer.createContainerElement('span', {
+		class: 'ck-anchor-placeholder',
+	}, [writer.createText(`[INVISIBLE ANCHOR: ${anchorId}]`)]);
 	return toWidget(anchorElement, writer );
 }
 

@@ -80,7 +80,7 @@ export function createEmptyAnchorElement( id, { writer } ) {
 export function createEmptyPlaceholderAnchorElement( anchorId, { writer } ) {
 	const anchorElement = writer.createContainerElement('span', {
 		class: 'ck-anchor-placeholder',
-	}, [writer.createText(`#${anchorId}`)]);
+	}, [writer.createText(`[INVISIBLE ANCHOR: ${anchorId}]`)]);
 	return toWidget(anchorElement, writer );
 }
 

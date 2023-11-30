@@ -18,6 +18,8 @@ import UnanchorCommand from './unanchorcommand';
 import ManualDecorator from './utils/manualdecorator';
 import findAttributeRange from '@ckeditor/ckeditor5-typing/src/utils/findattributerange';
 import { keyCodes } from '@ckeditor/ckeditor5-utils/src/keyboard';
+import { viewToModelPositionOutsideModelElement } from "ckeditor5/src/widget";
+
 import {
 	createAnchorElement,
 	createEmptyAnchorElement, createEmptyPlaceholderAnchorElement,
@@ -80,15 +82,21 @@ export default class AnchorEditing extends Plugin {
 			allowContentOf: '$inlineObject',
 			allowWhere: '$inlineObject',
 			inheritTypesFrom: '$inlineObject',
-			allowAttributes: [ 'class', 'id' ]
+			allowAttributes: [ 'class', 'id', 'anchorId' ]
 		});
 
 		editor.conversion.for( 'dataDowncast' )
-			.attributeToElement( { model: 'anchorId', view: createAnchorElement } );
+			.attributeToElement( {
+				model: {
+					name: '$text',
+					key: 'anchorId',
+				},
+				view: createAnchorElement,
+			});
 		editor.conversion.for('dataDowncast').elementToElement({
 			model: 'anchor',
 			view: (modelItem, viewWriter) => {
-				return createEmptyAnchorElement( modelItem.getAttribute('id'), viewWriter);
+				return createEmptyAnchorElement( modelItem.getAttribute('anchorId'), viewWriter);
 			}
 		});
 
@@ -104,7 +112,7 @@ export default class AnchorEditing extends Plugin {
 		editor.conversion.for('editingDowncast').elementToElement({
 			model: 'anchor',
 			view: (modelItem, viewWriter) => {
-				return createEmptyPlaceholderAnchorElement( modelItem.getAttribute('id'), viewWriter, true);
+				return createEmptyPlaceholderAnchorElement( modelItem.getAttribute('anchorId'), viewWriter, true);
 			}
 		});
 
@@ -133,7 +141,7 @@ export default class AnchorEditing extends Plugin {
 				view: {
 					name: 'a',
 					attributes: {
-						id: true
+						id: true,
 					}
 				},
 				model: ( viewElement, { writer } ) => {
@@ -141,7 +149,7 @@ export default class AnchorEditing extends Plugin {
 						return;
 					}
 
-					return writer.createElement( 'anchor', { id: viewElement.getAttribute('id') } );
+					return writer.createElement( 'anchor', { anchorId: viewElement.getAttribute('id') } );
 				}
 			} );
 
@@ -172,6 +180,11 @@ export default class AnchorEditing extends Plugin {
 
 		// Handle removing the content after the anchor element.
 		this._handleDeleteContentAfterAnchor();
+
+		editor.editing.mapper.on(
+			'viewToModelPosition',
+			viewToModelPositionOutsideModelElement( editor.model, viewElement => viewElement.hasClass( 'ck-anchor-placeholder' ) )
+		);
 	}
 
 	/**

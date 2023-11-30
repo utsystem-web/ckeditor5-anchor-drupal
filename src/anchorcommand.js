@@ -189,7 +189,7 @@ export default class AnchorCommand extends Command {
 				// So, if `id` is empty, do not create text node.
 				else if ( id !== '' ) {
 					const attributes = toMap( selection.getAttributes() );
-					attributes.set('id', id);
+					attributes.set('anchorId', id);
 
 					truthyManualDecorators.forEach( item => {
 						attributes.set( item, true );
@@ -207,6 +207,12 @@ export default class AnchorCommand extends Command {
 				[ 'anchorId', ...truthyManualDecorators, ...falsyManualDecorators ].forEach( item => {
 					writer.removeSelectionAttribute( item );
 				} );
+			} else if (selection.getSelectedElement()?.name === 'anchor') {
+				// Replace an invisible anchor.
+				const anchor = writer.createElement('anchor', {
+					anchorId: id
+				});
+				model.insertObject(anchor, null, null, { setSelection: 'on' });
 			} else {
 				// If selection has non-collapsed ranges, we change attribute on nodes inside those ranges
 				// omitting nodes where the `anchorId` attribute is disallowed.

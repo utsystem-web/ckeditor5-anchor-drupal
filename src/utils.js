@@ -8,6 +8,7 @@
  */
 
 import { upperFirst } from 'lodash-es';
+import { toWidget } from "ckeditor5/src/widget";
 
 const ATTRIBUTE_WHITESPACES = /[\u0000-\u0020\u00A0\u1680\u180E\u2000-\u2029\u205f\u3000]/g; // eslint-disable-line no-control-regex
 const SAFE_URL = /^(?:(?:https?|ftps?|mailto):|[^a-z]|[a-z+.-]+(?:[^a-z+.:-]|$))/i;
@@ -72,18 +73,15 @@ export function createEmptyAnchorElement( id, { writer } ) {
 /**
  * Creates an SVG placeholder {@link module:engine/view/emptyelement~EmptyElement} with the provided `id` attribute.
  *
- * @param {String} id
+ * @param {String} anchorId
  * @param {module:engine/conversion/downcastdispatcher~DowncastConversionApi} conversionApi
  * @returns {module:engine/view/emptyelement~EmptyElement}
  */
-export function createEmptyPlaceholderAnchorElement( id, { writer } ) {
-	const anchorElement = writer.createRawElement('span', { id }, function (domDocument) {
-       domDocument.innerHTML = `[INVISIBLE ANCHOR: ${id}]`;
-    });
-    writer.addClass("ck-anchor", anchorElement);
-	writer.setCustomProperty( 'anchor', true, anchorElement );
-
-	return anchorElement;
+export function createEmptyPlaceholderAnchorElement( anchorId, { writer } ) {
+	const anchorElement = writer.createContainerElement('span', {
+		class: 'ck-anchor-placeholder',
+	}, [writer.createText(`[INVISIBLE ANCHOR: ${anchorId}]`)]);
+	return toWidget(anchorElement, writer );
 }
 
 /**

@@ -122,7 +122,6 @@ export default class AnchorEditing extends Plugin {
 					name: 'a',
 					attributes: {
 						id: true,
-						href: false
 					}
 				},
 				model: {

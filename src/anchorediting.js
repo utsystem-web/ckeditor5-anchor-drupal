@@ -82,7 +82,7 @@ export default class AnchorEditing extends Plugin {
 			allowContentOf: '$inlineObject',
 			allowWhere: '$inlineObject',
 			inheritTypesFrom: '$inlineObject',
-			allowAttributes: [ 'class', 'id', 'anchorId' ]
+			allowAttributes: [ 'class', 'id', 'anchorId', 'name' ]
 		});
 
 		editor.conversion.for( 'dataDowncast' )
@@ -139,6 +139,26 @@ export default class AnchorEditing extends Plugin {
 					}
 				}
 			} );
+		
+		editor.conversion.for( 'upcast' )
+			.elementToAttribute( {
+				view: {
+					name: 'a',
+					attributes: {
+						name: true,
+					}
+				},
+				model: {
+					key: 'anchorId',
+					value: viewElement => {
+						if (viewElement.childCount < 1) {
+							return;
+						}
+
+						return viewElement.getAttribute( 'name' );
+					}
+				}
+			} );
 
 		editor.conversion.for( 'upcast' )
 			.elementToElement( {
@@ -154,6 +174,23 @@ export default class AnchorEditing extends Plugin {
 					}
 
 					return writer.createElement( 'anchor', { anchorId: viewElement.getAttribute('id') } );
+				}
+			} );
+		
+		editor.conversion.for( 'upcast' )
+			.elementToElement( {
+				view: {
+					name: 'a',
+					attributes: {
+						name: true
+					}
+				},
+				model: ( viewElement, { writer } ) => {
+					if (viewElement.childCount > 0) {
+						return;
+					}
+
+					return writer.createElement( 'anchor', { anchorId: viewElement.getAttribute('name') } );
 				}
 			} );
 

@@ -122,13 +122,16 @@ export default class AnchorEditing extends Plugin {
 					name: 'a',
 					attributes: {
 						id: true,
-						href: false
 					}
 				},
 				model: {
 					key: 'anchorId',
 					value: viewElement => {
 						if (viewElement.childCount < 1) {
+							return;
+						}
+
+						if (viewElement.hasAttribute('href')) {
 							return;
 						}
 

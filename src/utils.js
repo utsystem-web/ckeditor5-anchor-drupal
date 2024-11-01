@@ -26,7 +26,7 @@ const PROTOCOL_REG_EXP = /^((\w+:(\/{2,})?)|(\W))/i;
 export const LINK_KEYSTROKE = 'Ctrl+M';
 
 /**
- * Returns `true` if a given view node is the anchor element, or <a> with 
+ * Returns `true` if a given view node is the anchor element, or <a> with
  * id attribute.
  *
  * @param {module:engine/view/node~Node} node
@@ -49,7 +49,7 @@ export function isAnchorElement( node ) {
 export function createAnchorElement( id, { writer } ) {
 	// Priority 5 - https://github.com/ckeditor/ckeditor5-anchor/issues/121.
 	const anchorElement = writer.createAttributeElement( 'a', { id }, { priority: 5 } );
-	writer.addClass("ck-anchor", anchorElement);
+
 	writer.setCustomProperty( 'anchor', true, anchorElement );
 
 	return anchorElement;

@@ -15,6 +15,10 @@
     "type": "git",
     "url": "https://github.com/utsystem-web/ckeditor5-anchor-drupal.git"
   },
+  "bugs": {
+    "url": "https://github.com/utsystem-web/ckeditor5-anchor-drupal/issues"
+  },
+  "homepage": "https://github.com/utsystem-web/ckeditor5-anchor-drupal#readme",
   "main": "src/index.js",
   "license": "MIT",
   "engines": {

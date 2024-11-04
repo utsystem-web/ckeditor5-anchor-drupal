@@ -1,6 +1,6 @@
 {
-  "name": "@northernco/ckeditor5-anchor-drupal",
-  "version": "0.5.0",
+  "name": "@utsystem-web/ckeditor5-anchor-drupal",
+  "version": "1.0.0",
   "description": "Drupal CKEditor 5 integration",
   "keywords": [
     "ckeditor",
@@ -11,6 +11,10 @@
     "ckeditor5-dll",
     "ckeditor5-package-generator"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/utsystem-web/ckeditor5-anchor-drupal.git"
+  },
   "main": "src/index.js",
   "license": "MIT",
   "engines": {

@@ -4,9 +4,9 @@
 This package implements the anchor feature for CKEditor 5. It allows inserting anchor elements with `id` and `name`
 attributes into the edited content and offers the UI to create and edit them.
 
-This fork of [northernco/ckeditor5-anchor-drupal](https://github.com/northernco/ckeditor5-anchor-drupal) intended for
+This fork of [northernco/ckeditor5-anchor-drupal](https://github.com/northernco/ckeditor5-anchor-drupal) is intended for
 use with the 3.x branch of [CKEditor Anchor Link](https://www.drupal.org/project/anchor_link) (with patches as indicated
-below). It includes updates intended to resolve the following issues form the
+below). It includes updates to resolve the following issues form the
 [CKEditor Anchor Link issue queue](https://www.drupal.org/project/issues/anchor_link):
 
 - [Support concurrent use of CKEditor 4 and 5 [#3484756] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3484756)

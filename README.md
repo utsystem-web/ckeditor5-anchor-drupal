@@ -9,15 +9,15 @@ use with the 3.x branch of [CKEditor Anchor Link](https://www.drupal.org/project
 below). It includes updates to resolve the following issues form the
 [CKEditor Anchor Link issue queue](https://www.drupal.org/project/issues/anchor_link):
 
-- [Support concurrent use of CKEditor 4 and 5 [#3484756] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3484756)
+- [Support concurrent use of CKEditor 4 and 5 [#3484756]](https://www.drupal.org/project/anchor_link/issues/3484756)
   - Patch required: https://www.drupal.org/files/issues/2024-10-30/anchor_link-support-cke4.patch
-- [Support the "name" attribute for backwards compatibility [#3399656] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3399656)
+- [Support the "name" attribute for backwards compatibility [#3399656]](https://www.drupal.org/project/anchor_link/issues/3399656)
   - Patch required: https://www.drupal.org/files/issues/2024-11-04/3399656-27-support-name.patch
-- [ID's are stripped from links [#3443785] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3443785)
-- [Anchor "auto-linking" selects too much text [#3475059] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3475059) - This issue has been resolved by disabling the `autoanchor` plugin entirely.
-- [Duplicate ID in Anchor Icon SVG Causes Accessibility Issues [#3426731] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3426731)
-- [Allow "INVISIBLE ANCHOR" text to be overridden in CSS [#3475322] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3475322)
-- [Anchor class should not be added to data view [#3438755] | Drupal.org](https://www.drupal.org/project/anchor_link/issues/3438755)
+- [ID's are stripped from links [#3443785]](https://www.drupal.org/project/anchor_link/issues/3443785)
+- [Anchor "auto-linking" selects too much text [#3475059]](https://www.drupal.org/project/anchor_link/issues/3475059) - This issue has been resolved by disabling the `autoanchor` plugin entirely.
+- [Duplicate ID in Anchor Icon SVG Causes Accessibility Issues [#3426731]](https://www.drupal.org/project/anchor_link/issues/3426731)
+- [Allow "INVISIBLE ANCHOR" text to be overridden in CSS [#3475322]](https://www.drupal.org/project/anchor_link/issues/3475322)
+- [Anchor class should not be added to data view [#3438755]](https://www.drupal.org/project/anchor_link/issues/3438755)
 
 ## Table of contents
 
